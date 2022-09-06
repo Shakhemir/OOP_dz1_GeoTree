@@ -3,6 +3,11 @@ package DZ_OOP_01_geo_tree;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * В этом классе только статические методы для построения отношений
+ * между персонами, например: брак мужа и жены, статус детей и родителей.
+ * Так же отдельно добавлена проверка на запрет однополых браков)
+ */
 public class Family {
 
     static void marry(Person partner1, Person partner2) {
@@ -17,6 +22,7 @@ public class Family {
     // Добавление детей одной персоне
     static void addChildren(Person person, List<Person> children) {
         person.children.addAll(children);
+        // каждому ребенку устанавливаем родителя
         for (Person child : children) {
             if (!person.isFemale) {
                 child.father = person;
@@ -33,6 +39,7 @@ public class Family {
         addChildren(mother, children);
     }
 
+    // Установление обоих родителей для персоны
     static void setParents(Person person, Person father, Person mother) {
         checkSex(father, mother);
         person.father = father;
@@ -41,6 +48,7 @@ public class Family {
         addChildren(mother, Arrays.asList(person));
     }
 
+    // Если известен только один родитель
     static void setParent(Person person, Person parent) {
         if (parent.isFemale) {
             setParents(person, Person.nullFather, parent);
@@ -48,6 +56,8 @@ public class Family {
             setParents(person, parent, Person.nullMother);
         }
     }
+
+    // Проверка на разнополость партнеров
     private static void checkSex(Person partner1, Person partner2) {
         // Проверка на разнополость партнеров
         if (partner1.isFemale == partner2.isFemale) {

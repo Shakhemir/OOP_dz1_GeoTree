@@ -7,7 +7,7 @@ public class Person {
     public String name;
     public boolean isFemale;  // false - мужской пол, true - женский пол
     public Person father;
-    public Person mother;  // муж / жена
+    public Person mother;
     public boolean isMarried;  // статус брака
     public Person partner;  // муж / жена
     public List<Person> children;  // дети (список)
@@ -16,6 +16,8 @@ public class Person {
         this.name = name;
         this.isMarried = false;
         this.isFemale = false;
+        // по умолчанию добавляются неизвестные родители,
+        // во избежании дальнейших ошибок
         this.father = nullFather;
         this.mother = nullMother;
         children = new ArrayList<>();
@@ -33,7 +35,7 @@ public class Person {
 
     @Override
     public String toString() {
-        String married = isFemale ? "замужем за " : "женат на ";
+//        String married = isFemale ? "замужем за " : "женат на ";
         String result;
 //        result = name + "\n" + (isMarried ? married + partner.name : "холост") + "\n"
 //                + childrenAmount() + " детей";
