@@ -17,28 +17,20 @@ public class Person {
         children = new ArrayList<>();
     }
 
+    // Конструктор для женского пола
     public Person(String name, boolean isFemale) {
         this(name);
         this.isFemale = isFemale;
     }
 
-    public void setPartner(Person partner) {
-        // Проверка на разнополость партнеров
-        if (this.isFemale == partner.isFemale) {
-            throw new IllegalArgumentException("Однополые браки запрещены!");
-        }
-        // Церемония бракосочетания
-        this.isMarried = true;
-        partner.isMarried = true;
-        this.partner = partner;
-        partner.partner = this;
-    }
-
-    public void addChildren(List<Person> children) {
-        this.children.addAll(children);
-    }
-
     public Integer childrenAmount() {
         return this.children.size();
+    }
+
+    @Override
+    public String toString() {
+        String married = isFemale ? "замужем за " : "женат на ";
+        return name + ", " + (isMarried ? married + partner.name : "холост") + ", "
+                + childrenAmount() + " детей";
     }
 }
