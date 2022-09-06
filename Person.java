@@ -6,6 +6,8 @@ import java.util.List;
 public class Person {
     public String name;
     public boolean isFemale;  // false - мужской пол, true - женский пол
+    public Person father;
+    public Person mother;  // муж / жена
     public boolean isMarried;  // статус брака
     public Person partner;  // муж / жена
     public List<Person> children;  // дети (список)
@@ -14,6 +16,8 @@ public class Person {
         this.name = name;
         this.isMarried = false;
         this.isFemale = false;
+        this.father = nullFather;
+        this.mother = nullMother;
         children = new ArrayList<>();
     }
 
@@ -30,7 +34,14 @@ public class Person {
     @Override
     public String toString() {
         String married = isFemale ? "замужем за " : "женат на ";
-        return name + ", " + (isMarried ? married + partner.name : "холост") + ", "
-                + childrenAmount() + " детей";
+        String result;
+//        result = name + "\n" + (isMarried ? married + partner.name : "холост") + "\n"
+//                + childrenAmount() + " детей";
+        result = name;
+        return result;
     }
+
+    static Person nullFather = new Person("неизвестен");
+    static Person nullMother = new Person("неизвестна", true);
+
 }
